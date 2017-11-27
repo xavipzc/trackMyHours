@@ -1,0 +1,149 @@
+/**
+ * importer.less
+ *
+ * By default, new Sails projects are configured to compile this file
+ * from LESS to CSS.  Unlike CSS files, LESS files are not compiled and
+ * included automatically unless they are imported below.
+ *
+ * The LESS files imported below are compiled and included in the order
+ * they are listed.  Mixins, variables, etc. should be imported first
+ * so that they can be accessed by subsequent LESS stylesheets.
+ *
+ * (Just like the rest of the asset pipeline bundled in Sails, you can
+ * always omit, customize, or replace this behavior with SASS, SCSS,
+ * or any other Grunt tasks you like.)
+ */
+
+
+
+// For example:
+//
+// @import 'variables/colors.less';
+// @import 'mixins/foo.less';
+// @import 'mixins/bar.less';
+// @import 'mixins/baz.less';
+//
+// @import 'styleguide.less';
+// @import 'pages/login.less';
+// @import 'pages/signup.less';
+//
+// etc.
+
+
+body {
+    margin: 0;
+    background: #dadada;
+}
+
+h1 { margin: 0 }
+hr { margin-bottom: 0 }
+.time-tracker {
+    padding: 0 0 0 0;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 20px 30px -18px grey;
+}
+.time-tracker-bottom {
+    margin-top: 25px;
+    color: gray;
+}
+.time-tracker-bottom a {
+    color: gray;
+}
+
+.header {
+    background: #9D50BB;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    height: 150px;
+    border-radius: 10px 10px 0 0;
+    padding-top: 40px;
+    color: white;
+}
+
+.today-date {
+    font-size: 16px;
+    margin-top: 15px;
+    color: pink;
+}
+
+.btn-rounded {
+    position: absolute;
+    top: 125px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 28px;
+    box-shadow: 0px 0px 14px -3px black;
+}
+
+.wrap {
+    word-wrap: break-word;
+    padding: 30px 20px;    
+    box-shadow: 0px 20px 30px -18px grey;
+    background-color: white;
+}
+.highlight {
+    color: white;
+    background: #9D50BB;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #6E48AA, #9D50BB);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #6E48AA, #9D50BB); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.wrap h2 {
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: rgb(218, 218, 218);
+}
+.wrap-data {
+    font-size: 48px;
+    margin-bottom: -10px;
+}
+.wrap-under {
+    font-size: 12px;
+    color: rgb(218, 218, 218);
+}
+
+form #chrono {
+    font-size: 36px;
+    margin-top: 25px;
+    color: gray;
+}
+
+.recap {
+    margin-bottom: 0;
+}
+
+.recap li {
+    padding: 20px 0;
+    width: 32%;
+    border-left: 1px solid #eee;
+}
+.recap li:first-child {
+    border-left: none;
+}
+.recap-title {
+    font-size: 12px;
+    color: gray;
+}
+.recap-data {
+    font-size: 22px;
+    color: #9D50BB;
+}
+
+.start {
+    padding-top: 20px;
+    color: #9D50BB;
+}
+
+.tracker-table {
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.green { color: rgb(110, 212, 42); }
+.red { color: #d9534f; }
+.pink { color: pink; }
+.purple { color: #9D50BB; }

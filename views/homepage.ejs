@@ -1,0 +1,88 @@
+<%  
+  var res = 0;
+  var qua = 0;
+  hours.forEach(function(hour){ 
+    if (moment(hour.start).isSame(moment(), 'quarter')) {
+      qua += moment(hour.end).diff(moment(hour.start));
+      if (moment(hour.start).isSame(moment(), 'month')) {
+        res += moment(hour.end).diff(moment(hour.start));
+      }
+    }
+  }); 
+  var todo = moment.duration(res) - moment.duration(140, 'hours');
+  var term = moment.duration(qua) - moment.duration(420, 'hours');
+%>
+
+<div class="row text-center">
+    <div class="time-tracker col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+        <div class="header">
+            <h1>Track your day !</h1>
+            <p class="today-date">
+                <%= moment().format("dddd D MMMM YYYY") %>
+            </p>
+        </div>
+        <form action="/tracker" method="POST" role="form">
+    
+            <% if (id !== undefined) {
+                var counter = moment().diff(moment(date));
+            %>
+                <button type="submit" name="quit" value="<%= id %>" class="btn btn-danger btn-rounded">
+                    <span class="glyphicon glyphicon-pause" aria-hidden="true"></span>
+                </button>
+                <p id="chrono"><img src="/images/Spinner.svg" alt="loader"></p>
+                <hr>
+                <div class="start text-center">
+                    <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span> 
+                    <p>You start your day the <br> <%= moment(date).format("D MMMM YYYY à H:mm:ss") %></p>
+                </div>
+                <script>
+                    var timer = new Timer();
+                    timer.start({startValues: {seconds: '<%= moment(counter) / 1000 %>'}});
+                    timer.addEventListener('secondsUpdated', function (e) {
+                        $('#chrono').html(timer.getTimeValues().toString());
+
+                        var now = new Date();
+                        if (now.getHours() === 23 && now.getMinutes() === 59) {
+                            document.getElementsByName('quit')[0].click();
+                        }
+                    });
+                </script>
+            <% } else { %>
+                <button type="submit" name="start" class="btn btn-success btn-rounded">
+                    <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                </button>
+                <p id="chrono">00:00:00</p>
+            <% } %>
+                <hr>
+                <ul class="recap list-inline">
+                    <li class="text-center">
+                        <span class="recap-title"><%= moment().format("MMMM").toUpperCase() %></span>
+                        <br>
+                        <span class="recap-data"><%= moment.duration(res).format("H[h]mm") %></span>
+                    </li>
+                    <li class="text-center">
+                        <span class="recap-title">HEURES À FAIRE</span>
+                        <br>
+                        <% if (moment.duration(todo).asMilliseconds() > 0) { %>
+                            <span class="recap-data green">+<%= moment.duration(todo).format("H[h]mm") %></span>
+                        <% } else { %>
+                            <span class="recap-data red"><%= moment.duration(todo).format("H[h]mm") %></span>
+                        <% } %>
+                    </li>
+                    <li class="text-center">
+                        <span class="recap-title">TRIMESTRE</span>
+                        <br>
+                        <% if (moment.duration(term).asMilliseconds() > 0) { %>
+                            <span class="recap-data green">+<%= moment.duration(term).format("H[h]mm") %></span>
+                        <% } else { %>
+                            <span class="recap-data red"><%= moment.duration(term).format("H[h]mm") %></span>
+                        <% } %>
+                    </li>
+                </ul>
+        </form>
+    </div>
+
+    <div class="time-tracker-bottom col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2">
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span> <a href="/stats/<%= moment().format('MM') %>">Month's details</a>
+    </div>
+</div>

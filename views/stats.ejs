@@ -1,0 +1,74 @@
+<%  
+    var res = 0;
+    var qua = 0;
+    hours.forEach(function(hour){ 
+    if (moment(hour.start).isSame(moment({y: new Date().getFullYear(), M: id - 1}), 'quarter')) {
+        if (moment(hour.start).isSameOrBefore(moment({y: new Date().getFullYear(), M: id - 1}), 'month')) {
+            qua += moment(hour.end).diff(moment(hour.start));
+            if (moment(hour.start).isSame(moment({y: new Date().getFullYear(), M: id - 1}), 'month')) {
+                res += moment(hour.end).diff(moment(hour.start));
+            }
+        }
+    }
+    }); 
+    var todo = moment.duration(res) - moment.duration(140, 'hours');
+    var term = moment.duration(qua) - moment.duration(420, 'hours');
+%>
+
+<div class="row">
+
+    <div class="wrap highlight text-center col-xs-4 col-sm-4">
+        <h2 class="pink">THIS MONTH</h2>
+        <p class="wrap-data"><%= moment.duration(res).format("H[h]mm") %></p>
+        <span class="wrap-under">ON 140 HOURS</span>
+    </div>
+
+    <div class="wrap text-center col-xs-4 col-sm-4">
+        <h2>HAVE TO DO</h2>
+        <% if (moment.duration(todo).asMilliseconds() > 0) { %>
+            <p class="wrap-data green">+<%= moment.duration(todo).format("H[h]mm") %></p>
+        <% } else { %>
+            <p class="wrap-data purple"><%= moment.duration(todo).format("H[h]mm") %></p>
+        <% } %>
+        <span class="wrap-under">FOR THIS MONTH</span>
+    </div>
+
+    <div class="wrap highlight text-center col-xs-4 col-sm-4">
+        <h2 class="pink">TERM</h2>
+        <p class="wrap-data"><%= moment.duration(term).format("H[h]mm") %></p>
+        <span class="wrap-under">ON 420 HOURS</span>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <table class="tracker-table table table-striped">
+        <thead>
+            <tr>
+            <th scope="col">Day</th>
+            <th scope="col" class="text-right">Arrived at</th>
+            <th scope="col" class="text-right">Left at</th>
+            <th scope="col" class="text-right">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for (hour of hours) { 
+                if (moment(hour.start).isSame(moment({y: new Date().getFullYear(), M: id - 1}), 'month')) {
+            %>
+            <tr>
+            <td><%= moment(hour.start).format("dddd D MMMM YYYY") %> - <a href="delete_hours/<%= hour.id %>">Delete</a></td>
+            <td class="text-right"><%= moment(hour.start).format("H:mm") %></td>
+            <td class="text-right"><%= moment(hour.end).format("H:mm") %></td>
+            <td class="purple text-right"><b><%= moment.duration(moment(hour.end).diff(moment(hour.start))).format("H:mm", { trim: false }) %></b></td>
+            </tr>
+            <% }} %>
+            <tr class="text-right">
+                <td></td>
+                <td></td>
+                <td><b>TOTAL</b></td>
+                <td class="green"><b><%= moment.duration(res).format("H:mm", { trim: false }) %></b></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
