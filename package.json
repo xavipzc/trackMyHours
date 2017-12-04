@@ -33,7 +33,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/PZC/trackMyHours.git"
+    "url": "git://github.com/xavipzc/trackMyHours.git"
   },
   "author": "PZC",
   "license": ""

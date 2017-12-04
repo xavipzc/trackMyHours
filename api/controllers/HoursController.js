@@ -59,6 +59,7 @@ module.exports = {
     },
 
     deleteHours: function(req, res) {
+        console.log(req.param('id'));
         Hours.destroy({ id: req.param('id') }).exec(function (err) {
             if (err) {
                 return err;
@@ -66,7 +67,7 @@ module.exports = {
             console.log('Hours id '+ req.param('id') +' deleted !');
             return res.redirect('/stats');
         });
-    },
+    }
 
 };
 

@@ -44,7 +44,7 @@ var todo = moment.duration(qua) - moment.duration(420, 'hours');
             if (moment(hour.start).isSame(moment({y: new Date().getFullYear(), M: new Date().getMonth()}), 'quarter')) {
         %>
         <tr>
-        <td><%= moment(hour.start).format("dddd D MMMM YYYY") %> - <a href="delete_hours/<%= hour.id %>">Delete</a></td>
+        <td><%= moment(hour.start).format("dddd D MMMM YYYY") %> - <a href="/delete_hours/<%= hour.id %>">Delete</a></td>
         <td class="text-right"><%= moment(hour.start).format("H:mm") %></td>
         <td class="text-right"><%= moment(hour.end).format("H:mm") %></td>
         <td class="purple text-right"><b><%= moment.duration(moment(hour.end).diff(moment(hour.start))).format("H:mm", { trim: false }) %></b></td>
